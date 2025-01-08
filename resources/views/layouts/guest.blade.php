@@ -29,6 +29,7 @@
                 <h3 class="text-center mt-0 mb-3">
                     <livewire:theme.logo />
                 </h3>
+                <h5 class="text-center mt-0 text-color"><b>Sign In</b></h5>
                 {{ $slot }}
             </div>
         </div>

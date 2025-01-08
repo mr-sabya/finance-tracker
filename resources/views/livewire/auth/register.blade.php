@@ -1,5 +1,5 @@
 <div class="mx-3">
-    <form class="form-horizontal mt-3" action="https://themesdesign.in/appzia/layouts/index.html">
+    <form class="form-horizontal mt-3" wire:submit.prevent="register">
 
         <div class="form-group mb-3">
             <div class="col-12">
@@ -31,14 +31,21 @@
 
         <div class="form-group text-center mt-4">
             <div class="col-12">
-                <button class="btn btn-primary btn-block btn-lg waves-effect waves-light w-100" type="submit">Register</button>
+                <button
+                    type="submit"
+                    wire:loading.attr="disabled"
+                    wire:target="register"
+                    class="btn btn-primary btn-block btn-lg waves-effect waves-light w-100">
+                    <span wire:loading.remove wire:target="register">Register</span>
+                    <span wire:loading wire:target="register">Register.....</span>
+                </button>
             </div>
         </div>
 
         <div class="form-group mt-3 mb-0">
             <div class="col-sm-12 text-center">
                 <p class="text-white">Already have account? <a href="{{ route('login') }}" wire:navigate class="text-color">Login</a></p>
-                
+
             </div>
         </div>
 

@@ -3,6 +3,7 @@
 namespace App\Livewire\Auth;
 
 use Illuminate\Support\Facades\Auth;
+use Livewire\Attributes\Layout;
 use Livewire\Component;
 
 class Login extends Component
@@ -23,6 +24,7 @@ class Login extends Component
         session()->flash('error', 'Invalid credentials.');
     }
 
+    #[Layout('layouts.guest')] 
     public function render()
     {
         return view('livewire.auth.login');

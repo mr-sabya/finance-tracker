@@ -30,4 +30,16 @@ use Illuminate\Database\Eloquent\Model;
 class Income extends Model
 {
     use HasFactory;
+
+    protected $fillable = ['user_id', 'resource_id', 'amount', 'income_date'];
+
+    public function resource()
+    {
+        return $this->belongsTo(Resource::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

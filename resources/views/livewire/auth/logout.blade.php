@@ -1,3 +1,1 @@
-<div>
-    {{-- Close your eyes. Count to one. That is how long forever feels. --}}
-</div>
+<a class="dropdown-item text-danger" href="javascript:void(0)"><i class="ri-shut-down-line align-middle me-1 text-danger"></i> Logout</a>

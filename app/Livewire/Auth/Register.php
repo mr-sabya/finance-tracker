@@ -4,6 +4,7 @@ namespace App\Livewire\Auth;
 
 use App\Models\User;
 use Hash;
+use Livewire\Attributes\Layout;
 use Livewire\Component;
 
 class Register extends Component
@@ -28,6 +29,7 @@ class Register extends Component
         return redirect('/login');
     } 
 
+    #[Layout('layouts.guest')] 
     public function render()
     {
         return view('livewire.auth.register');

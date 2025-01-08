@@ -17,8 +17,6 @@
     <!-- Icons Css -->
     <link href="{{ asset('assets/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
 
-    @rappasoftTableStyles
-
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/libs/toastr/build/toastr.min.css') }}">
 
     <!-- App Css-->
@@ -72,9 +70,6 @@
     <script data-navigate-once src="{{ asset('assets/libs/metismenu/metisMenu.min.js') }}"></script>
     <script data-navigate-once src="{{ asset('assets/libs/simplebar/simplebar.min.js') }}"></script>
     <script data-navigate-once src="{{ asset('assets/libs/node-waves/waves.min.js') }}"></script>
-
-    <!-- Adds the Core Table Scripts -->
-    @rappasoftTableScripts
 
     <!-- toastr plugin -->
     <script data-navigate-once src="{{ asset('assets/libs/toastr/build/toastr.min.js') }}"></script>

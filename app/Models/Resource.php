@@ -26,4 +26,16 @@ use Illuminate\Database\Eloquent\Model;
 class Resource extends Model
 {
     use HasFactory;
+
+    protected $fillable = ['name', 'parent_id'];
+
+    public function subresources()
+    {
+        return $this->hasMany(Resource::class, 'parent_id');
+    }
+
+    public function parent()
+    {
+        return $this->belongsTo(Resource::class, 'parent_id');
+    }
 }
