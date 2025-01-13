@@ -64,53 +64,79 @@ new class extends Component
 }; ?>
 
 <section>
-    <header>
-        <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
+    <header class="mb-4">
+        <h2 class="h4 text-dark">
             {{ __('Profile Information') }}
         </h2>
 
-        <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
+        <p class="text-muted">
             {{ __("Update your account's profile information and email address.") }}
         </p>
     </header>
 
-    <form wire:submit="updateProfileInformation" class="mt-6 space-y-6">
-        <div>
-            <x-input-label for="name" :value="__('Name')" />
-            <x-text-input wire:model="name" id="name" name="name" type="text" class="mt-1 block w-full" required autofocus autocomplete="name" />
-            <x-input-error class="mt-2" :messages="$errors->get('name')" />
+    <form wire:submit.prevent="updateProfileInformation" class="mt-4">
+        <div class="mb-3">
+            <label for="name" class="form-label">{{ __('Name') }}</label>
+            <input
+                wire:model="name"
+                type="text"
+                id="name"
+                name="name"
+                class="form-control"
+                required
+                autofocus
+                autocomplete="name" />
+            @error('name')
+            <div class="text-danger mt-2">
+                {{ $message }}
+            </div>
+            @enderror
         </div>
 
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input wire:model="email" id="email" name="email" type="email" class="mt-1 block w-full" required autocomplete="username" />
-            <x-input-error class="mt-2" :messages="$errors->get('email')" />
+        <div class="mb-3">
+            <label for="email" class="form-label">{{ __('Email') }}</label>
+            <input
+                wire:model="email"
+                type="email"
+                id="email"
+                name="email"
+                class="form-control"
+                required
+                autocomplete="username" />
+            @error('email')
+            <div class="text-danger mt-2">
+                {{ $message }}
+            </div>
+            @enderror
 
             @if (auth()->user() instanceof \Illuminate\Contracts\Auth\MustVerifyEmail && ! auth()->user()->hasVerifiedEmail())
-                <div>
-                    <p class="text-sm mt-2 text-gray-800 dark:text-gray-200">
-                        {{ __('Your email address is unverified.') }}
+            <div class="mt-3">
+                <p class="text-muted">
+                    {{ __('Your email address is unverified.') }}
+                    <button
+                        wire:click.prevent="sendVerification"
+                        class="btn btn-link p-0 text-decoration-underline">
+                        {{ __('Click here to re-send the verification email.') }}
+                    </button>
+                </p>
 
-                        <button wire:click.prevent="sendVerification" class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800">
-                            {{ __('Click here to re-send the verification email.') }}
-                        </button>
-                    </p>
-
-                    @if (session('status') === 'verification-link-sent')
-                        <p class="mt-2 font-medium text-sm text-green-600 dark:text-green-400">
-                            {{ __('A new verification link has been sent to your email address.') }}
-                        </p>
-                    @endif
-                </div>
+                @if (session('status') === 'verification-link-sent')
+                <p class="text-success mt-2">
+                    {{ __('A new verification link has been sent to your email address.') }}
+                </p>
+                @endif
+            </div>
             @endif
         </div>
 
-        <div class="flex items-center gap-4">
-            <x-primary-button>{{ __('Save') }}</x-primary-button>
+        <div class="d-flex align-items-center gap-3">
+            <button type="submit" class="btn btn-primary">{{ __('Save') }}</button>
 
-            <x-action-message class="me-3" on="profile-updated">
+            @if (session('profile-updated'))
+            <span class="text-success">
                 {{ __('Saved.') }}
-            </x-action-message>
+            </span>
+            @endif
         </div>
     </form>
 </section>

@@ -75,3 +75,19 @@
 .list-unstyled li{
     margin-bottom: 10px;
 }
+
+
+/* short */
+.table-action{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+.table-action .short,
+.table-action .short .fields{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+}

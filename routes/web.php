@@ -22,11 +22,13 @@ Route::middleware('guest')->group(function () {
 });
 
 Route::middleware('auth')->group(function () {
-    Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])
-        ->name('home');
-
+    Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    
     Route::view('profile', 'profile')
-        ->name('profile');
+    ->name('profile');
+
+
+    Route::get('resource', [App\Http\Controllers\ResourceController::class, 'index'])->name('resource.index');
 });
 
 // require __DIR__.'/auth.php';
