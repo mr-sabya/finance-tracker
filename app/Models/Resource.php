@@ -27,7 +27,7 @@ class Resource extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'parent_id'];
+    protected $fillable = ['user_id', 'name', 'parent_id'];
 
     public function subresources()
     {
@@ -38,4 +38,10 @@ class Resource extends Model
     {
         return $this->belongsTo(Resource::class, 'parent_id');
     }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
 }

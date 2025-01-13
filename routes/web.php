@@ -29,6 +29,12 @@ Route::middleware('auth')->group(function () {
 
 
     Route::get('resource', [App\Http\Controllers\ResourceController::class, 'index'])->name('resource.index');
+    Route::get('income', [App\Http\Controllers\IncomeController::class, 'index'])->name('income.index');
+
+    Route::get('category', [App\Http\Controllers\CategoryController::class, 'index'])->name('category.index');
+    Route::get('expense', [App\Http\Controllers\ExpenseController::class, 'index'])->name('expense.index');
+
+    Route::get('report', [App\Http\Controllers\ReportController::class, 'index'])->name('report.index');
 });
 
 // require __DIR__.'/auth.php';

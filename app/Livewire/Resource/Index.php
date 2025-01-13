@@ -3,6 +3,7 @@
 namespace App\Livewire\Resource;
 
 use App\Models\Resource;
+use Auth;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -31,14 +32,18 @@ class Index extends Component
     public function create()
     {
         $this->validate();
-        Resource::create(['name' => $this->name, 'parent_id' => $this->parent_id]);
+        Resource::create([
+            'name' => $this->name,
+            'parent_id' => $this->parent_id,
+            'user_id' => Auth::id(),
+        ]);
         session()->flash('message', 'Resource created successfully.');
         $this->resetInput();
     }
 
     public function edit($id)
     {
-        $resource = Resource::findOrFail($id);
+        $resource = Resource::where('id', $id)->where('user_id', Auth::id())->firstOrFail();
         $this->resource_id = $resource->id;
         $this->name = $resource->name;
         $this->parent_id = $resource->parent_id;
@@ -48,24 +53,22 @@ class Index extends Component
     public function update()
     {
         $this->validate();
-        $resource = Resource::findOrFail($this->resource_id);
+        $resource = Resource::where('id', $this->resource_id)->where('user_id', Auth::id())->firstOrFail();
         $resource->update(['name' => $this->name, 'parent_id' => $this->parent_id]);
         session()->flash('message', 'Resource updated successfully.');
         $this->resetInput();
     }
 
-    // To trigger the modal and confirm deletion
     public function confirmDelete($resourceId)
     {
         $this->resourceIdToDelete = $resourceId;
         $this->dispatch('show-delete-modal');
     }
 
-    // To handle deletion
     public function deleteResource()
     {
         if ($this->resourceIdToDelete) {
-            $resource = Resource::find($this->resourceIdToDelete);
+            $resource = Resource::where('id', $this->resourceIdToDelete)->where('user_id', Auth::id())->first();
             if ($resource) {
                 $resource->delete();
                 session()->flash('message', 'Resource deleted successfully!');
@@ -90,7 +93,10 @@ class Index extends Component
 
     public function render()
     {
-        $resources = Resource::with('parent')
+        // Fetch resources that belong to the authenticated user and have parent_id as null or children
+        $resources = Resource::with('subresources')
+            ->where('user_id', Auth::id())  // Only show resources belonging to the authenticated user
+            ->whereNull('parent_id')
             ->where('name', 'like', '%' . $this->search . '%')
             ->orderBy($this->sortField, $this->sortDirection)
             ->paginate(10);

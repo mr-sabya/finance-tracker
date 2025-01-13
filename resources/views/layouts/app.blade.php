@@ -24,6 +24,9 @@
     <link href="{{ asset('assets/css/custom.css') }}" id="app-style" rel="stylesheet" type="text/css" />
     @livewireStyles
 
+    <!-- chart -->
+    <script data-navigate-once src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 </head>
 
 <body data-sidebar="dark">
@@ -70,6 +73,7 @@
     <script data-navigate-once src="{{ asset('assets/libs/metismenu/metisMenu.min.js') }}"></script>
     <script data-navigate-once src="{{ asset('assets/libs/simplebar/simplebar.min.js') }}"></script>
     <script data-navigate-once src="{{ asset('assets/libs/node-waves/waves.min.js') }}"></script>
+
 
     <!-- toastr plugin -->
     <script data-navigate-once src="{{ asset('assets/libs/toastr/build/toastr.min.js') }}"></script>

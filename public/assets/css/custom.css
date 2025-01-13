@@ -72,22 +72,41 @@
     color: #007bff;
 }
 
-.list-unstyled li{
+.list-unstyled li {
     margin-bottom: 10px;
 }
 
 
 /* short */
-.table-action{
+.table-action {
     display: flex;
     justify-content: space-between;
     margin-bottom: 15px;
 }
 
 .table-action .short,
-.table-action .short .fields{
+.table-action .short .fields {
     display: flex;
     justify-content: space-between;
     align-items: center;
     gap: 10px;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+
+/* chart */
+.chat-container {
+    width: 100%;
+    /* Fixed width */
+    height: 350px;
+    /* Set height for the scrollable area */
+    overflow-y: scroll;
+    /* Enable vertical scrolling */
+    border: 1px solid #ccc;
+    /* Optional: Add border for better visibility */
+    padding: 10px;
+    /* Optional: Add padding for content */
 }

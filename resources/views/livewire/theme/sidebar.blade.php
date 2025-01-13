@@ -13,6 +13,13 @@
 
                 <livewire:components.menu-item title="Resource" route="{{ route('resource.index') }}" icon="ri-calendar-2-line" />
 
+                <livewire:components.menu-item title="Income" route="{{ route('income.index') }}" icon="ri-calendar-2-line" />
+
+
+                <livewire:components.menu-item title="Category" route="{{ route('category.index') }}" icon="ri-calendar-2-line" />
+                <livewire:components.menu-item title="Expense" route="{{ route('expense.index') }}" icon="ri-calendar-2-line" />
+                <livewire:components.menu-item title="Report" route="{{ route('report.index') }}" icon="ri-calendar-2-line" />
+
                 <li>
                     <a href="#" wire:navigate class=" waves-effect">
                         <i class="ri-calendar-2-line"></i>
