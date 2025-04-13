@@ -13,6 +13,19 @@ class Index extends Component
     public $totalIncome;
     public $totalExpense;
     public $netBalance;
+
+    public $dailyIncome;
+    public $dailyExpense;
+    public $dailyBalance;
+
+    public $monthlyIncome;
+    public $monthlyExpense;
+    public $monthlyBalance;
+
+    public $yearlyIncome;
+    public $yearlyExpense;
+    public $yearlyBalance;
+
     public $incomeData = [];
     public $expenseData = [];
 
@@ -24,14 +37,43 @@ class Index extends Component
     public function loadData()
     {
         $userId = auth()->id();
+        $today = Carbon::today();
         $thisMonth = Carbon::now()->startOfMonth();
+        $thisYear = Carbon::now()->startOfYear();
 
-        // Calculate total income, expense, and net balance
+        // **Daily**
+        $this->dailyIncome = Income::where('user_id', $userId)->whereDate('income_date', $today)->sum('amount');
+        $this->dailyExpense = Expense::where('user_id', $userId)->whereDate('expense_date', $today)->sum('amount');
+        $this->dailyBalance = $this->dailyIncome - $this->dailyExpense;
+
+        // **Monthly**
+        $this->monthlyIncome = Income::where('user_id', $userId)
+            ->whereBetween('income_date', [$thisMonth, Carbon::now()])
+            ->sum('amount');
+
+        $this->monthlyExpense = Expense::where('user_id', $userId)
+            ->whereBetween('expense_date', [$thisMonth, Carbon::now()])
+            ->sum('amount');
+
+        $this->monthlyBalance = $this->monthlyIncome - $this->monthlyExpense;
+
+        // **Yearly**
+        $this->yearlyIncome = Income::where('user_id', $userId)
+            ->whereYear('income_date', Carbon::now()->year)
+            ->sum('amount');
+
+        $this->yearlyExpense = Expense::where('user_id', $userId)
+            ->whereYear('expense_date', Carbon::now()->year)
+            ->sum('amount');
+
+        $this->yearlyBalance = $this->yearlyIncome - $this->yearlyExpense;
+
+        // **Total**
         $this->totalIncome = Income::where('user_id', $userId)->sum('amount');
         $this->totalExpense = Expense::where('user_id', $userId)->sum('amount');
         $this->netBalance = $this->totalIncome - $this->totalExpense;
 
-        // Group income and expense by day for charts
+        // Data for charts (income and expense grouped by day)
         $this->incomeData = Income::where('user_id', $userId)
             ->where('income_date', '>=', $thisMonth)
             ->selectRaw('DATE(income_date) as date, SUM(amount) as total')
@@ -46,7 +88,6 @@ class Index extends Component
             ->orderBy('date')
             ->get();
     }
-
 
     public function render()
     {
@@ -63,6 +104,22 @@ class Index extends Component
             ->get();
 
         return view('livewire.dashboard.index', [
+            'dailyIncome' => $this->dailyIncome,
+            'dailyExpense' => $this->dailyExpense,
+            'dailyBalance' => $this->dailyBalance,
+
+            'monthlyIncome' => $this->monthlyIncome,
+            'monthlyExpense' => $this->monthlyExpense,
+            'monthlyBalance' => $this->monthlyBalance,
+
+            'yearlyIncome' => $this->yearlyIncome,
+            'yearlyExpense' => $this->yearlyExpense,
+            'yearlyBalance' => $this->yearlyBalance,
+
+            'totalIncome' => $this->totalIncome,
+            'totalExpense' => $this->totalExpense,
+            'netBalance' => $this->netBalance,
+
             'incomes' => $incomes,
             'expenses' => $expenses,
         ]);

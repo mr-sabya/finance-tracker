@@ -6,13 +6,31 @@ use Livewire\Component;
 
 class MenuItem extends Component
 {
-    public $title, $icon, $route;
+    public $url;
+    public $icon;
+    public $label;
+    public $hasSubMenu = false;
+    public $subMenuItems = [];
 
-    public function mount($title, $route, $icon)
+    public function mount($url = null, $icon, $label, $hasSubMenu = false, $subMenuItems = [])
     {
-        $this->title = $title;
-        $this->route = $route;
+        $this->url = $url;
+
         $this->icon = $icon;
+        $this->label = $label;
+        $this->hasSubMenu = $hasSubMenu;
+        $this->subMenuItems = $subMenuItems;
+    }
+
+    // Helper function to handle routes and URLs
+    public function getUrl()
+    {
+        // Check if the URL is a named route
+        if (route($this->url)) {
+            return route($this->url);  // Return the generated URL from named route
+        }
+
+        return $this->url;  // Return the URL if it's a direct link
     }
 
     public function render()

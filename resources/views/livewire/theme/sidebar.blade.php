@@ -8,17 +8,51 @@
             <ul class="metismenu list-unstyled" id="side-menu">
                 <li class="menu-title">Menu</li>
 
-                <livewire:components.menu-item title="Dashboard" route="{{ route('home') }}" icon="ri-dashboard-line" />
-                <livewire:components.menu-item title="Profile" route="{{ route('profile') }}" icon="ri-calendar-2-line" />
 
-                <livewire:components.menu-item title="Resource" route="{{ route('resource.index') }}" icon="ri-calendar-2-line" />
+                <livewire:components.menu-item
+                    :url="'home'"
+                    :icon="'ri-dashboard-line'"
+                    :label="'Dashboard'"
+                    :hasSubMenu="false" />
 
-                <livewire:components.menu-item title="Income" route="{{ route('income.index') }}" icon="ri-calendar-2-line" />
+                <!-- profile -->
+                <livewire:components.menu-item
+                    :url="'profile'"
+                    :icon="'ri-dashboard-line'"
+                    :label="'Profile'"
+                    :hasSubMenu="false" />
+
+                <livewire:components.menu-item
+                    :url="''"
+                    :icon="'ri-layout-3-line'"
+                    :label="'Income'"
+                    :hasSubMenu="true"
+                    :subMenuItems="
+                    [
+                        ['url' => 'resource.index', 'label' => 'Resource'],
+                        ['url' => 'income.index', 'label' => 'Income'],
+                    ]" />
+
+                <!-- expense -->
+                <livewire:components.menu-item
+                    :url="''"
+                    :icon="'ri-layout-3-line'"
+                    :label="'Expense'"
+                    :hasSubMenu="true"
+                    :subMenuItems="
+                    [
+                        ['url' => 'category.index', 'label' => 'Category'],
+                        ['url' => 'expense.index', 'label' => 'Expense'],
+                    ]" />
 
 
-                <livewire:components.menu-item title="Category" route="{{ route('category.index') }}" icon="ri-calendar-2-line" />
-                <livewire:components.menu-item title="Expense" route="{{ route('expense.index') }}" icon="ri-calendar-2-line" />
-                <livewire:components.menu-item title="Report" route="{{ route('report.index') }}" icon="ri-calendar-2-line" />
+                <livewire:components.menu-item
+                    :url="'report.index'"
+                    :icon="'ri-dashboard-line'"
+                    :label="'Report'"
+                    :hasSubMenu="false" />
+                
+
 
                 <li>
                     <a href="#" wire:navigate class=" waves-effect">
