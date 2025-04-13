@@ -6,7 +6,7 @@
         <div class="col-md-4">
             <div class="card text-white bg-primary mb-3">
                 <div class="card-header">
-                    <h4>Total Income</h4>
+                    <h4 class="m-0">Total Income</h4>
                 </div>
                 <div class="card-body">
                     <h5 class="card-title">${{ number_format($totalIncome, 2) }}</h5>
@@ -16,7 +16,7 @@
         <div class="col-md-4">
             <div class="card text-white bg-danger mb-3">
                 <div class="card-header">
-                    <h4>Total Expenses</h4>
+                    <h4 class="m-0">Total Expenses</h4>
                 </div>
                 <div class="card-body">
                     <h5 class="card-title">${{ number_format($totalExpense, 2) }}</h5>
@@ -26,7 +26,7 @@
         <div class="col-md-4">
             <div class="card text-white bg-success mb-3">
                 <div class="card-header">
-                    <h4>Net Balance</h4>
+                    <h4 class="m-0">Net Balance</h4>
                 </div>
                 <div class="card-body">
                     <h5 class="card-title">${{ number_format($netBalance, 2) }}</h5>
@@ -121,7 +121,7 @@
         <div class="col-lg-6">
             <div class="card h-100">
                 <div class="card-header">
-                    <h4>Recent Transactions (Income)</h4>
+                    <h4 class="m-0">Recent Transactions (Income)</h4>
                 </div>
                 <div class="card-body">
                     <table class="table table-striped table-bordered">
@@ -149,7 +149,7 @@
         <div class="col-lg-6">
             <div class="card h-100">
                 <div class="card-header">
-                    <h4>Recent Transactions (Expense)</h4>
+                    <h4 class="m-0">Recent Transactions (Expense)</h4>
                 </div>
                 <div class="card-body">
                     <table class="table table-striped table-bordered">
